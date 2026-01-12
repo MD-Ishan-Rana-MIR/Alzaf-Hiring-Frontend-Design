@@ -39,7 +39,7 @@ export default function ProductsClient({
   }, [page, filters.search, filters.minPrice, filters.maxPrice, filters.category]);
 
   return (
-    <MaxWidth>
+    <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading ? (
           <p>Loading products...</p>
@@ -65,11 +65,10 @@ export default function ProductsClient({
             <button
               key={p}
               onClick={() => setPage(p)}
-              className={`px-3 py-1 rounded-md ${
-                p === page
+              className={`px-3 py-1 rounded-md ${p === page
                   ? "bg-primary text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-              }`}
+                }`}
             >
               {p}
             </button>
@@ -84,6 +83,6 @@ export default function ProductsClient({
           </button>
         </div>
       )}
-    </MaxWidth>
+    </>
   );
 }

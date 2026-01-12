@@ -5,18 +5,18 @@ export const BASE_URL = "https://alzaf-frontend-2025.vercel.app/api";
 // fetch all category api 
 
 export const fetchAllCategory = async () => {
-    const res = await fetch(`${BASE_URL}/categories`);
-    const data = await res.json();
-    return data?.data?.categories
+  const res = await fetch(`${BASE_URL}/categories`);
+  const data = await res.json();
+  return data?.data?.categories
 }
 
 
 // category by product api 
 
 export const categoryByProductApi = async (categoryName: string, minPrice: number, maxPrice: number) => {
-    const res = await fetch(`${BASE_URL}/products?categories=${categoryName}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
-    const data = await res.json();
-    return data?.data?.products;
+  const res = await fetch(`${BASE_URL}/products?categories=${categoryName}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+  const data = await res.json();
+  return data?.data?.products;
 }
 
 
@@ -120,16 +120,18 @@ export const fetchProductsByCategory = async (category?: string) => {
 
 
 export const fetchProductdetails = async (
-  id: number
+  id: string
 ): Promise<ProductType> => {
   const res = await fetch(
-    `https://alzaf-frontend-2025.vercel.app/api/products/${id}`,
+    `https://alzaf-frontend-2025.vercel.app/api/products/1`,
     { cache: "no-store" }
   );
 
-  
+
 
   const data = await res.json();
+
+  console.log("product details is", data)
 
   return data.data?.data as ProductType;
 };

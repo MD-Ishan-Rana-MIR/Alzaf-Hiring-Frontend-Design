@@ -4,15 +4,15 @@ import MaxWidth from "@/app/components/max-width/MaxWidth";
 import ProductFilter from "@/app/components/product-filter/ProductFilter";
 import ProductsClient from "@/app/components/product/ProductClient";
 
-interface ProductType {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  rating: number;
-  stock: number;
-  brand: string;
-}
+// interface ProductType {
+//   id: number;
+//   name: string;
+//   price: number;
+//   image: string;
+//   rating: number;
+//   stock: number;
+//   brand: string;
+// }
 
 interface ProductsPageProps {
   searchParams: {

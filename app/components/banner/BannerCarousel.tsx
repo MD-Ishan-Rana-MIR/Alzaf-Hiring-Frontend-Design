@@ -27,14 +27,13 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
 
   return (
     <div className="relative w-full  h-[calc(100vh-64px)] 
-  sm:h-[calc(100vh-200px)] 
+  sm:h-[calc(100vh-800px)] 
   lg:h-[calc(100vh-130px)] overflow-hidden -mt-10  bg-gray-400  ">
       {banners.map((banner, index) => (
         <div
           key={banner.id}
-          className={`absolute inset-0 transition-opacity duration-700 flex px-16 flex-col md:flex-row items-center ${
-            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-700 flex px-16 flex-col md:flex-row items-center ${index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
         >
           {/* Left side: Text */}
           <div className="w-full md:w-1/2 p-6 flex flex-col justify-center  text-black rounded-l-xl">
@@ -43,21 +42,11 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
             <p className="mt-2 text-lg sm:text-xl font-semibold">{banner.description}</p>
             <p className="mt-2 text-sm sm:text-base line-clamp-3">{banner.description}</p>
             <Link href={banner.link}>
-  <button className="
-    mt-4 inline-flex items-center gap-2
-    px-6 py-3
-    bg-white text-black
-    font-semibold
-    rounded-full
-    shadow-lg
-    hover:bg-black hover:text-white
-    transition-all duration-300
-    cursor-pointer
-  ">
-    {banner.buttonText}
-    <span className="text-lg">→</span>
-  </button>
-</Link>
+              <button className="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-black hover:text-white transition-all duration-300 cursor-pointer">
+                {banner.buttonText}
+                <span className="text-lg">→</span>
+              </button>
+            </Link>
           </div>
 
           {/* Right side: Image */}
@@ -75,26 +64,25 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black text-white p-2 rounded-full hover:bg-black/60 shadow-lg"
+        className="absolute left-4 top-1/2  cursor-pointer  -translate-y-1/2 bg-black text-white p-2 rounded-full hover:bg-black/60 shadow-lg"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white p-2 rounded-full hover:bg-black/60 shadow-lg"
+        className="absolute right-4 top-1/2 cursor-pointer   -translate-y-1/2 bg-black text-white p-2 rounded-full hover:bg-black/60 shadow-lg"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-4 cursor-pointer  left-1/2 -translate-x-1/2 flex gap-2">
         {banners.map((_, idx) => (
           <span
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className={`h-3 w-3 rounded-full cursor-pointer transition-colors ${
-              idx === currentIndex ? "bg-white" : "bg-red-400"
-            }`}
+            className={`h-3 w-3 rounded-full cursor-pointer transition-colors ${idx === currentIndex ? "bg-white" : "bg-red-400"
+              }`}
           ></span>
         ))}
       </div>
