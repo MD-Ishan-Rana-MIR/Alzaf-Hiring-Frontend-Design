@@ -11,3 +11,4 @@ export interface ProductType {
     categoryId : number;
     categorySlug : string
 }
+

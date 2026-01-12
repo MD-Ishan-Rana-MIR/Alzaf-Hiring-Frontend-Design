@@ -1,37 +1,28 @@
-"use client";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import ProductFilter from "@/app/components/product-filter/ProductFilter";
+import MaxWidth from "@/app/components/max-width/MaxWidth";
+import { fetchCategories, fetchProducts, CategoryType, ProductType } from "@/app/api/api";
+import ProductsClient from "@/app/components/product/ProductClient";
 
-const ProductFilter = () => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
+export default async function ProductsPage() {
+  const categories: CategoryType[] = await fetchCategories();
+  const { products, totalPages } = await fetchProducts({ page: 1, limit: 10 });
 
-    const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
-    const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
-    const [categories, setCategories] = useState<string[]>(searchParams.getAll("category") || []);
-
-    useEffect(() => {
-        const params = new URLSearchParams();
-        if (minPrice) params.set("minPrice", minPrice);
-        if (maxPrice) params.set("maxPrice", maxPrice);
-        categories.forEach(c => params.append("category", c));
-
-        router.replace(`?${params.toString()}`);
-    }, [minPrice, maxPrice, categories]);
-
-    return (
-        <div>
-            {/* Price Inputs */}
-            <input type="number" value={minPrice} onChange={e => setMinPrice(e.target.value)} placeholder="Min" />
-            <input type="number" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} placeholder="Max" />
-
-            {/* Categories */}
-            <input type="checkbox" checked={categories.includes("Electronics")} onChange={e => {
-                if (e.target.checked) setCategories([...categories, "Electronics"]);
-                else setCategories(categories.filter(c => c !== "Electronics"));
-            }} /> Electronics
+  return (
+    <MaxWidth>
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
+        <div className="md:w-[20%]  " >
+          <ProductFilter categories={categories} />
         </div>
-    );
-};
+          <div className="md:w-[80%] " >
+            <ProductsClient
+        initialProducts={products}
+        initialTotalPages={totalPages}
+        filters={{ page: 1, limit: 10 }}
+      />
+          </div>
+      </div>
 
-export default ProductFilter;
+      
+    </MaxWidth>
+  );
+}
